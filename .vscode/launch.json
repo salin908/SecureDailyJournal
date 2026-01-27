@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET MAUI (Windows)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-windows",
+            "program": "${workspaceFolder}/SecureDailyJournal/bin/Debug/net9.0-windows10.0.19041.0/win10-x64/SecureDailyJournal.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/SecureDailyJournal",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}
