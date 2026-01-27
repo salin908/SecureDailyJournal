@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SecureDailyJournal.ViewModels"
+             x:Class="SecureDailyJournal.Views.MainPage"
+             Title="Journal"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            
+            <!-- Header with Date and Streak -->
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="{Binding FormattedDate}" 
+                           FontSize="24" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    <HorizontalStackLayout Spacing="5">
+                        <DatePicker Date="{Binding SelectedDate}" 
+                                    FontSize="12"
+                                    TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        <Button Text="Today" 
+                                Command="{Binding GoToTodayCommand}"
+                                FontSize="11"
+                                Padding="8,2"
+                                BackgroundColor="#6366F1"
+                                TextColor="White"
+                                CornerRadius="10"
+                                HeightRequest="28"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                
+                <!-- Streak Badge -->
+                <Frame Grid.Column="1" 
+                       Padding="15,10" 
+                       CornerRadius="20"
+                       BackgroundColor="{AppThemeBinding Light=#FEF3C7, Dark=#78350F}"
+                       BorderColor="Transparent"
+                       HasShadow="False">
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="🔥" FontSize="18"/>
+                        <Label Text="{Binding CurrentStreak}" 
+                               FontSize="18" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#92400E, Dark=#FCD34D}"/>
+                    </HorizontalStackLayout>
+                </Frame>
+            </Grid>
+            
+            <!-- Title Entry -->
+            <Frame Style="{StaticResource CardStyle}" Padding="15">
+                <Entry Text="{Binding Title}" 
+                       Placeholder="Give your entry a title..."
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"
+                       TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"
+                       BackgroundColor="Transparent"/>
+            </Frame>
+            
+            <!-- Primary Mood Selection -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="How are you feeling?" 
+                               FontSize="16" 
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Label Text="{Binding SelectedMoodEmoji}" FontSize="28"/>
+                    </HorizontalStackLayout>
+                    
+                    <FlexLayout Wrap="Wrap" JustifyContent="Start">
+                        <BindableLayout.ItemsSource>
+                            <Binding Path="AvailableMoods"/>
+                        </BindableLayout.ItemsSource>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MoodOption">
+                                <Button Text="{Binding Emoji}"
+                                        FontSize="24"
+                                        WidthRequest="50"
+                                        HeightRequest="50"
+                                        Margin="3"
+                                        CornerRadius="25"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:JournalViewModel}}, Path=SelectMoodCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="{AppThemeBinding Light=#F1F5F9, Dark=#334155}"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Category Selection -->
+            <Frame Style="{StaticResource CardStyle}" Padding="15">
+                <Grid ColumnDefinitions="Auto,*">
+                    <Label Grid.Column="0" 
+                           Text="Category:" 
+                           FontSize="14"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"
+                           Margin="0,0,10,0"/>
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding Categories}"
+                            SelectedItem="{Binding SelectedCategory}"
+                            ItemDisplayBinding="{Binding Name}"
+                            TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                </Grid>
+            </Frame>
+            
+            <!-- Content Editor with Preview Toggle -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*,Auto,Auto">
+                        <Label Grid.Column="0" 
+                               Text="Your thoughts..." 
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding WordCount, StringFormat='{0} words'}" 
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"
+                               Margin="0,0,10,0"/>
+                        <Button Grid.Column="2" 
+                                Text="{Binding IsPreviewMode, Converter={StaticResource InvertedBoolConverter}, ConverterParameter='Preview'}"
+                                Command="{Binding TogglePreviewCommand}"
+                                FontSize="12"
+                                Padding="10,5"
+                                BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"
+                                CornerRadius="8"/>
+                    </Grid>
+                    
+                    <!-- Markdown Formatting Toolbar -->
+                    <Frame Padding="8" 
+                           BackgroundColor="{AppThemeBinding Light=#F1F5F9, Dark=#1E293B}"
+                           BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#334155}"
+                           CornerRadius="8"
+                           HasShadow="False"
+                           IsVisible="{Binding IsPreviewMode, Converter={StaticResource InvertedBoolConverter}}">
+                        <FlexLayout Wrap="Wrap" 
+                                    JustifyContent="Start" 
+                                    AlignItems="Center">
+                            <Button Text="B" 
+                                    FontAttributes="Bold"
+                                    Command="{Binding ApplyBoldCommand}"
+                                    ToolTipProperties.Text="Bold"
+                                    FontSize="13"
+                                    Padding="10,6"
+                                    Margin="2"
+                                    CornerRadius="6"
+                                    HeightRequest="32"
+                                    WidthRequest="40"
+                                    BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                    TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"/>
+                            
+                            <Button Text="I" 
+                                    FontAttributes="Italic"
+                                    Command="{Binding ApplyItalicCommand}"
+                                    ToolTipProperties.Text="Italic"
+                                    FontSize="13"
+                                    Padding="10,6"
+                                    Margin="2"
+                                    CornerRadius="6"
+                                    HeightRequest="32"
+                                    WidthRequest="40"
+                                    BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                    TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"/>
+                            
+                            <Button Text="H1"
+                                    Command="{Binding ApplyHeadingCommand}"
+                                    CommandParameter="1"
+                                    ToolTipProperties.Text="Heading 1"
+                                    FontSize="12"
+                                    Padding="8,6"
+                                    Margin="2"
+                                    CornerRadius="6"
+                                    HeightRequest="32"
+                                    WidthRequest="40"
+                                    BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                    TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"/>
+                            
+                            <Button Text="H2"
+                                    Command="{Binding ApplyHeadingCommand}"
+                                    CommandParameter="2"
+                                    ToolTipProperties.Text="Heading 2"
+                                    FontSize="12"
+                                    Padding="8,6"
+                                    Margin="2"
+                                    CornerRadius="6"
+                                    HeightRequest="32"
+                                    WidthRequest="40"
+                                    BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                    TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"/>
+                            
+                            <Button Text="H3"
+                                    Command="{Binding ApplyHeadingCommand}"
+                                    CommandParameter="3"
+                                    ToolTipProperties.Text="Heading 3"
+                                    FontSize="12"
+                                    Padding="8,6"
+                                    Margin="2"
+                                    CornerRadius="6"
+                                    HeightRequest="32"
+                                    WidthRequest="40"
+                                    BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                    TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"/>
+                            
+                            <Button Text="• List"
+                                    Command="{Binding ApplyListCommand}"
+                                    CommandParameter="unordered"
+                                    ToolTipProperties.Text="Bullet List"
+                                    FontSize="11"
+                                    Padding="8,6"
+                                    Margin="2"
+                                    CornerRadius="6"
+                                    HeightRequest="32"
+                                    BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                    TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"/>
+                            
+                            <Button Text="1. List"
+                                    Command="{Binding ApplyListCommand}"
+                                    CommandParameter="ordered"
+                                    ToolTipProperties.Text="Numbered List"
+                                    FontSize="11"
+                                    Padding="8,6"
+                                    Margin="2"
+                                    CornerRadius="6"
+                                    HeightRequest="32"
+                                    BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                    TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"/>
+                            
+                            <Button Text="🔗 Link"
+                                    Command="{Binding InsertLinkCommand}"
+                                    ToolTipProperties.Text="Insert Link"
+                                    FontSize="11"
+                                    Padding="8,6"
+                                    Margin="2"
+                                    CornerRadius="6"
+                                    HeightRequest="32"
+                                    BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#475569}"
+                                    TextColor="{AppThemeBinding Light=#475569, Dark=#E2E8F0}"/>
+                        </FlexLayout>
+                    </Frame>
+                    
+                    
+                    <!-- Editor -->
+                    <Editor Text="{Binding Content}" 
+                            HeightRequest="200"
+                            IsVisible="{Binding IsPreviewMode, Converter={StaticResource InvertedBoolConverter}}"
+                            Placeholder="Write about your day, thoughts, feelings..."
+                            PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"
+                            TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"
+                            BackgroundColor="Transparent"/>
+                    
+                    <!-- Preview -->
+                    <Frame IsVisible="{Binding IsPreviewMode}" 
+                           HeightRequest="200"
+                           Padding="10"
+                           BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#1E293B}"
+                           BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#334155}"
+                           CornerRadius="8">
+                        <ScrollView>
+                            <Label Text="{Binding Content}" 
+                                   TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"
+                                   LineHeight="1.5"/>
+                        </ScrollView>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Tags Section -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Tags" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    
+                    <!-- Selected Tags -->
+                    <FlexLayout Wrap="Wrap" IsVisible="{Binding SelectedTags.Count}">
+                        <BindableLayout.ItemsSource>
+                            <Binding Path="SelectedTags"/>
+                        </BindableLayout.ItemsSource>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="10,5" 
+                                       Margin="3" 
+                                       CornerRadius="15"
+                                       BackgroundColor="#6366F1"
+                                       BorderColor="Transparent"
+                                       HasShadow="False">
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="{Binding .}" 
+                                               TextColor="White"
+                                               FontSize="12"/>
+                                        <Label Text="✕" 
+                                               TextColor="White"
+                                               FontSize="10">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:JournalViewModel}}, Path=RemoveTagCommand}"
+                                                    CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                    
+                    <!-- Add Custom Tag -->
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <Entry Grid.Column="0"
+                               Text="{Binding NewTag}"
+                               Placeholder="Add a tag..."
+                               PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Button Grid.Column="1"
+                                Text="Add"
+                                Command="{Binding AddCustomTagCommand}"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Padding="15,8"/>
+                    </Grid>
+                    
+                    <!-- Suggested Tags -->
+                    <Label Text="Suggestions:" 
+                           FontSize="12"
+                           TextColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"/>
+                    <FlexLayout Wrap="Wrap">
+                        <BindableLayout.ItemsSource>
+                            <Binding Path="SuggestedTags"/>
+                        </BindableLayout.ItemsSource>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Button Text="{Binding .}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:JournalViewModel}}, Path=ToggleTagCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Style="{StaticResource TagButtonStyle}"
+                                        Margin="3"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Action Buttons -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="15">
+                <!-- Save/Update Button - Changes text based on whether entry exists -->
+                <Button Grid.Column="0"
+                        Command="{Binding SaveJournalCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding HasExistingEntry}" Value="True">
+                            <Setter Property="Text" Value="✏️ Update Entry" />
+                            <Setter Property="BackgroundColor" Value="#F59E0B" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding HasExistingEntry}" Value="False">
+                            <Setter Property="Text" Value="💾 Save Entry" />
+                            <Setter Property="BackgroundColor" Value="#6366F1" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                
+                <Button Grid.Column="1"
+                        Text="🗑️"
+                        Command="{Binding DeleteEntryCommand}"
+                        IsVisible="{Binding HasExistingEntry}"
+                        WidthRequest="55"
+                        BackgroundColor="#EF4444"
+                        TextColor="White"
+                        CornerRadius="12"
+                        FontSize="20"/>
+            </Grid>
+            
+            <!-- Bottom Padding -->
+            <BoxView HeightRequest="20"/>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

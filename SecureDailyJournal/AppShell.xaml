@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SecureDailyJournal.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:SecureDailyJournal.Views"
+    Shell.FlyoutBehavior="Disabled">
+    
+    <!-- Login Route (no tab bar) -->
+    <ShellContent
+        Route="login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Shell.TabBarIsVisible="False"
+        Shell.NavBarIsVisible="False" />
+    
+    <!-- Main App with Tab Navigation -->
+    <TabBar Route="main">
+        <ShellContent
+            Title="Journal"
+            Icon="{OnPlatform Default='✏️'}"
+            Route="journal"
+            ContentTemplate="{DataTemplate views:MainPage}" />
+        
+        <ShellContent
+            Title="Calendar"
+            Icon="{OnPlatform Default='📅'}"
+            Route="calendar"
+            ContentTemplate="{DataTemplate views:CalendarPage}" />
+        
+        <ShellContent
+            Title="History"
+            Icon="{OnPlatform Default='📚'}"
+            Route="history"
+            ContentTemplate="{DataTemplate views:JournalListPage}" />
+        
+        <ShellContent
+            Title="Analytics"
+            Icon="{OnPlatform Default='📊'}"
+            Route="analytics"
+            ContentTemplate="{DataTemplate views:AnalyticsPage}" />
+        
+        <ShellContent
+            Title="Settings"
+            Icon="{OnPlatform Default='⚙️'}"
+            Route="settings"
+            ContentTemplate="{DataTemplate views:SettingsPage}" />
+    </TabBar>
+    
+</Shell>

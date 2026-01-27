@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SecureDailyJournal.Views.SettingsPage"
+             Title="Settings"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Header -->
+            <Label Text="Settings" 
+                   FontSize="28" 
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+            
+            <!-- Appearance Section -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Appearance" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    
+                    <Grid ColumnDefinitions="*,Auto">
+                        <HorizontalStackLayout Grid.Column="0" Spacing="10">
+                            <Label Text="🌙" FontSize="24" VerticalOptions="Center"/>
+                            <VerticalStackLayout>
+                                <Label Text="Dark Mode" 
+                                       FontSize="16"
+                                       TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                                <Label Text="Switch between light and dark theme" 
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                        <Switch Grid.Column="1" 
+                                IsToggled="{Binding IsDarkMode}"
+                                OnColor="#6366F1"
+                                VerticalOptions="Center"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Security Section -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Security" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    
+                    <Grid ColumnDefinitions="*,Auto">
+                        <HorizontalStackLayout Grid.Column="0" Spacing="10">
+                            <Label Text="🔐" FontSize="24" VerticalOptions="Center"/>
+                            <VerticalStackLayout>
+                                <Label Text="Change PIN" 
+                                       FontSize="16"
+                                       TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                                <Label Text="Update your security PIN" 
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                        <Button Grid.Column="1" 
+                                Text="Change"
+                                Command="{Binding ChangePinCommand}"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Padding="15,8"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Export Section -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Export" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    
+                    <VerticalStackLayout Spacing="10">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="📄" FontSize="24" VerticalOptions="Center"/>
+                            <VerticalStackLayout>
+                                <Label Text="Export to PDF" 
+                                       FontSize="16"
+                                       TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                                <Label Text="Download your journal entries as PDF" 
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                        
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,10,0,0">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="From" FontSize="12" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                                <DatePicker Date="{Binding ExportStartDate}"
+                                            BackgroundColor="{AppThemeBinding Light=#F1F5F9, Dark=#334155}"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="To" FontSize="12" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                                <DatePicker Date="{Binding ExportEndDate}"
+                                            BackgroundColor="{AppThemeBinding Light=#F1F5F9, Dark=#334155}"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                        
+                        <Button Text="Export PDF" 
+                                Command="{Binding ExportPdfCommand}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Margin="0,10,0,0"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Data Section -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Data" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    
+                    <Grid ColumnDefinitions="*,Auto">
+                        <HorizontalStackLayout Grid.Column="0" Spacing="10">
+                            <Label Text="💾" FontSize="24" VerticalOptions="Center"/>
+                            <VerticalStackLayout>
+                                <Label Text="Storage Location" 
+                                       FontSize="16"
+                                       TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                                <Label Text="{Binding StoragePath}" 
+                                       FontSize="11"
+                                       TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"
+                                       LineBreakMode="MiddleTruncation"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- About Section -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Label Text="📔" FontSize="40" HorizontalOptions="Center"/>
+                    <Label Text="Secure Daily Journal" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    <Label Text="Version 1.0.0" 
+                           FontSize="14"
+                           HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    <Label Text="Your thoughts, safely stored." 
+                           FontSize="12"
+                           HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"/>
+                </VerticalStackLayout>
+            </Frame>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

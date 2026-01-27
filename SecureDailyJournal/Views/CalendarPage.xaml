@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SecureDailyJournal.ViewModels"
+             x:Class="SecureDailyJournal.Views.CalendarPage"
+             Title="Calendar"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Month Navigation -->
+            <Frame Style="{StaticResource CardStyle}">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Button Grid.Column="0" 
+                            Text="◀" 
+                            Command="{Binding PreviousMonthCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{AppThemeBinding Light=#6366F1, Dark=#818CF8}"
+                            FontSize="20"/>
+                    <Label Grid.Column="1" 
+                           Text="{Binding CurrentMonthYear}" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    <Button Grid.Column="2" 
+                            Text="▶" 
+                            Command="{Binding NextMonthCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{AppThemeBinding Light=#6366F1, Dark=#818CF8}"
+                            FontSize="20"/>
+                </Grid>
+            </Frame>
+            
+            <!-- Calendar Grid -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <!-- Day Headers -->
+                    <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="5">
+                        <Label Grid.Column="0" Text="Sun" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        <Label Grid.Column="1" Text="Mon" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        <Label Grid.Column="2" Text="Tue" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        <Label Grid.Column="3" Text="Wed" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        <Label Grid.Column="4" Text="Thu" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        <Label Grid.Column="5" Text="Fri" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        <Label Grid.Column="6" Text="Sat" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </Grid>
+                    
+                    <!-- Calendar Days -->
+                    <CollectionView ItemsSource="{Binding CalendarDays}"
+                                    ItemsLayout="VerticalGrid, 7"
+                                    HeightRequest="300">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HeightRequest="40" WidthRequest="40">
+                                    <Frame Padding="0"
+                                           CornerRadius="20"
+                                           BackgroundColor="{Binding BackgroundColor}"
+                                           BorderColor="Transparent"
+                                           HasShadow="False">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CalendarViewModel}}, Path=SelectDateCommand}"
+                                                CommandParameter="{Binding Date}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Label Text="{Binding DayNumber}" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center"
+                                               TextColor="{Binding TextColor}"
+                                               FontAttributes="{Binding FontAttributes}"/>
+                                    </Frame>
+                                    <!-- Entry Indicator Dot -->
+                                    <BoxView WidthRequest="6" 
+                                             HeightRequest="6" 
+                                             CornerRadius="3"
+                                             BackgroundColor="#10B981"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="End"
+                                             Margin="0,0,0,2"
+                                             IsVisible="{Binding HasEntry}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Streak Display -->
+            <Frame Style="{StaticResource CardStyle}">
+                <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                    <Label Text="🔥" FontSize="32"/>
+                    <VerticalStackLayout>
+                        <Label Text="{Binding CurrentStreak, StringFormat='{0} Day Streak'}" 
+                               FontSize="18" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Label Text="{Binding LongestStreak, StringFormat='Longest: {0} days'}" 
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Frame>
+            
+            <!-- Selected Date Entry Preview -->
+            <Frame Style="{StaticResource CardStyle}" IsVisible="{Binding HasSelectedEntry}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding SelectedEntry.Title}" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    <Label Text="{Binding SelectedEntry.Content}" 
+                           MaxLines="3"
+                           TextColor="{AppThemeBinding Light=#475569, Dark=#CBD5E1}"/>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="{Binding SelectedEntry.PrimaryMood}" FontSize="20"/>
+                        <Label Text="{Binding SelectedEntry.EntryDateKey}" 
+                               VerticalOptions="Center"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </HorizontalStackLayout>
+                    <Button Text="Edit Entry" 
+                            Command="{Binding EditEntryCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}"/>
+                </VerticalStackLayout>
+            </Frame>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

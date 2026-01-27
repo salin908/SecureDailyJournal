@@ -1,0 +1,868 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SecureDailyJournal</name>
+    </assembly>
+    <members>
+        <member name="T:SecureDailyJournal.Converters.PinDotConverter">
+            <summary>
+            Converts PIN length to dot color for the PIN entry display
+            Parameter should be the index (0-5) of the dot
+            Returns filled color if PIN length > index, empty color otherwise
+            </summary>
+        </member>
+        <member name="T:SecureDailyJournal.Helpers.MarkdownHelper">
+            <summary>
+            Utility class for markdown formatting operations
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Helpers.MarkdownHelper.ApplyBold(System.String,System.Int32,System.Int32)">
+            <summary>
+            Wraps the selected text with markdown bold syntax
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Helpers.MarkdownHelper.ApplyItalic(System.String,System.Int32,System.Int32)">
+            <summary>
+            Wraps the selected text with markdown italic syntax
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Helpers.MarkdownHelper.ApplyHeading(System.String,System.Int32,System.Int32)">
+            <summary>
+            Applies heading markdown syntax to the current line
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Helpers.MarkdownHelper.ApplyList(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Applies list markdown syntax to the current line
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Helpers.MarkdownHelper.InsertLink(System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Inserts a markdown link at the cursor position
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Helpers.MarkdownHelper.RenderMarkdownPreview(System.String)">
+            <summary>
+            Renders basic markdown formatting for preview (simple implementation)
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Helpers.MarkdownHelper.GetNewCursorPosition(System.Int32,System.Int32,SecureDailyJournal.Helpers.MarkdownFormat)">
+            <summary>
+            Gets the new cursor position after applying formatting
+            </summary>
+        </member>
+        <member name="T:SecureDailyJournal.Helpers.MarkdownFormat">
+            <summary>
+            Markdown formatting types
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Services.SecurityService.IsPinSetAsync">
+            <summary>
+            Checks if a PIN has been set for the application
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Services.SecurityService.SetPinAsync(System.String)">
+            <summary>
+            Sets a new PIN for the application
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Services.SecurityService.VerifyPinAsync(System.String)">
+            <summary>
+            Verifies the provided PIN against the stored hash
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Services.SecurityService.ChangePinAsync(System.String,System.String)">
+            <summary>
+            Changes the PIN to a new value after verifying the old PIN
+            </summary>
+        </member>
+        <member name="M:SecureDailyJournal.Services.SecurityService.ResetPinAsync">
+            <summary>
+            Resets the PIN (requires app reinstall or manual DB deletion in production)
+            </summary>
+        </member>
+        <member name="T:SecureDailyJournal.ViewModels.AnalyticsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.AnalyticsViewModel.TotalEntries">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.AnalyticsViewModel.totalEntries"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.AnalyticsViewModel.CurrentStreak">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.AnalyticsViewModel.currentStreak"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.AnalyticsViewModel.LongestStreak">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.AnalyticsViewModel.longestStreak"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.AnalyticsViewModel.AverageWordCount">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.AnalyticsViewModel.averageWordCount"/>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.AnalyticsViewModel.refreshCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.AnalyticsViewModel.RefreshCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.AnalyticsViewModel.RefreshCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.AnalyticsViewModel.RefreshAsync"/>.</summary>
+        </member>
+        <member name="T:SecureDailyJournal.ViewModels.CalendarViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.CurrentMonth">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarViewModel._currentMonth"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.CurrentMonthYear">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarViewModel.currentMonthYear"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.CurrentStreak">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarViewModel.currentStreak"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.LongestStreak">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarViewModel.longestStreak"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.SelectedEntry">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarViewModel.selectedEntry"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.HasSelectedEntry">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarViewModel.hasSelectedEntry"/>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.CalendarViewModel.refreshDataCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.CalendarViewModel.RefreshDataCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.RefreshDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.CalendarViewModel.RefreshDataAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.CalendarViewModel.previousMonthCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.CalendarViewModel.PreviousMonthCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.PreviousMonthCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.CalendarViewModel.PreviousMonthAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.CalendarViewModel.nextMonthCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.CalendarViewModel.NextMonthCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.NextMonthCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.CalendarViewModel.NextMonthAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.CalendarViewModel.selectDateCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.CalendarViewModel.SelectDateCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.SelectDateCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.CalendarViewModel.SelectDateAsync(System.Nullable{System.DateTime})"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.CalendarViewModel.editEntryCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.CalendarViewModel.EditEntryCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarViewModel.EditEntryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.CalendarViewModel.EditEntryAsync"/>.</summary>
+        </member>
+        <member name="T:SecureDailyJournal.ViewModels.CalendarDay">
+            <inheritdoc/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarDay.IsSelected">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarDay.isSelected"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarDay.BackgroundColor">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarDay.backgroundColor"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.CalendarDay.TextColor">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.CalendarDay.textColor"/>
+        </member>
+        <member name="T:SecureDailyJournal.ViewModels.JournalListViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.SearchQuery">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalListViewModel.searchQuery"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.IsRefreshing">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalListViewModel.isRefreshing"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.IsLoading">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalListViewModel.isLoading"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.CurrentFilter">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalListViewModel.currentFilter"/>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalListViewModel.refreshCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalListViewModel.RefreshCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.RefreshCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalListViewModel.RefreshAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalListViewModel.loadMoreCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalListViewModel.LoadMoreCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.LoadMoreCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalListViewModel.LoadMoreAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalListViewModel.searchCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalListViewModel.SearchCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.SearchCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalListViewModel.SearchAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalListViewModel.filterCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalListViewModel.FilterCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.FilterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalListViewModel.FilterAsync(System.String)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalListViewModel.filterByMoodCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalListViewModel.FilterByMoodCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.FilterByMoodCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalListViewModel.FilterByMoodAsync(System.String)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalListViewModel.openEntryCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalListViewModel.OpenEntryCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalListViewModel.OpenEntryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalListViewModel.OpenEntryAsync(SecureDailyJournal.Models.JournalEntry)"/>.</summary>
+        </member>
+        <member name="T:SecureDailyJournal.ViewModels.JournalViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.Title">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.title"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.Content">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.content"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.PrimaryMood">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.primaryMood"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.SelectedMoodEmoji">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.selectedMoodEmoji"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.SelectedDate">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.selectedDate"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.CurrentStreak">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.currentStreak"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.IsPreviewMode">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.isPreviewMode"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.HasExistingEntry">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.hasExistingEntry"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.NewTag">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.newTag"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.SelectedCategory">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.selectedCategory"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.WordCount">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.wordCount"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.FormattedDate">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.formattedDate"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.CursorPosition">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.cursorPosition"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.SelectionLength">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.JournalViewModel.selectionLength"/>
+        </member>
+        <member name="M:SecureDailyJournal.ViewModels.JournalViewModel.OnContentChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.Content"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.Content"/> is changed.</remarks>
+        </member>
+        <member name="M:SecureDailyJournal.ViewModels.JournalViewModel.OnSelectedDateChanged(System.DateTime)">
+            <summary>Executes the logic for when <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.SelectedDate"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.SelectedDate"/> is changed.</remarks>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.togglePreviewCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.TogglePreviewCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.TogglePreviewCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.TogglePreview"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.selectMoodCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.SelectMoodCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.SelectMoodCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.SelectMood(SecureDailyJournal.ViewModels.MoodOption)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.toggleSecondaryMoodCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.ToggleSecondaryMoodCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.ToggleSecondaryMoodCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.ToggleSecondaryMood(System.String)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.toggleTagCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.ToggleTagCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.ToggleTagCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.ToggleTag(System.String)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.addCustomTagCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.AddCustomTagCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.AddCustomTagCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.AddCustomTag"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.removeTagCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.RemoveTagCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.RemoveTagCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.RemoveTag(System.String)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.saveJournalCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.SaveJournalCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.SaveJournalCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.SaveJournalAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.deleteEntryCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.DeleteEntryCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.DeleteEntryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.DeleteEntryAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.goToTodayCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.GoToTodayCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.GoToTodayCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.GoToToday"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.applyBoldCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.ApplyBoldCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.ApplyBoldCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.ApplyBold"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.applyItalicCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.ApplyItalicCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.ApplyItalicCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.ApplyItalic"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.applyHeadingCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.ApplyHeadingCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.ApplyHeadingCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.ApplyHeading(System.String)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.applyListCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.ApplyListCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.ApplyListCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.ApplyList(System.String)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.JournalViewModel.insertLinkCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.JournalViewModel.InsertLinkCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.JournalViewModel.InsertLinkCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.JournalViewModel.InsertLinkAsync"/>.</summary>
+        </member>
+        <member name="T:SecureDailyJournal.ViewModels.LoginViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.Pin">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.LoginViewModel.pin"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.ConfirmPin">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.LoginViewModel.confirmPin"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.IsFirstTimeSetup">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.LoginViewModel.isFirstTimeSetup"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.ErrorMessage">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.LoginViewModel.errorMessage"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.ShowError">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.LoginViewModel.showError"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.HeaderText">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.LoginViewModel.headerText"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.ShowConfirmPin">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.LoginViewModel.showConfirmPin"/>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.LoginViewModel.addDigitCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.LoginViewModel.AddDigitCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.AddDigitCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.LoginViewModel.AddDigit(System.String)"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.LoginViewModel.backspaceCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.LoginViewModel.BackspaceCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.BackspaceCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.LoginViewModel.Backspace"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.LoginViewModel.clearCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.LoginViewModel.ClearCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.ClearCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.LoginViewModel.Clear"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.LoginViewModel.submitCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.LoginViewModel.SubmitCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.LoginViewModel.SubmitCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.LoginViewModel.SubmitAsync"/>.</summary>
+        </member>
+        <member name="T:SecureDailyJournal.ViewModels.MainViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.MainViewModel.Title">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.MainViewModel.title"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.MainViewModel.Content">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.MainViewModel.content"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.MainViewModel.SelectedMood">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.MainViewModel.selectedMood"/>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.MainViewModel.saveJournalCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.MainViewModel.SaveJournalCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.MainViewModel.SaveJournalCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.MainViewModel.SaveJournal"/>.</summary>
+        </member>
+        <member name="T:SecureDailyJournal.ViewModels.SettingsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.SettingsViewModel.IsDarkMode">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.SettingsViewModel.isDarkMode"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.SettingsViewModel.ExportStartDate">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.SettingsViewModel.exportStartDate"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.SettingsViewModel.ExportEndDate">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.SettingsViewModel.exportEndDate"/>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.SettingsViewModel.StoragePath">
+            <inheritdoc cref="F:SecureDailyJournal.ViewModels.SettingsViewModel.storagePath"/>
+        </member>
+        <member name="M:SecureDailyJournal.ViewModels.SettingsViewModel.OnIsDarkModeChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:SecureDailyJournal.ViewModels.SettingsViewModel.IsDarkMode"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:SecureDailyJournal.ViewModels.SettingsViewModel.IsDarkMode"/> is changed.</remarks>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.SettingsViewModel.changePinCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.SettingsViewModel.ChangePinCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.SettingsViewModel.ChangePinCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.SettingsViewModel.ChangePinAsync"/>.</summary>
+        </member>
+        <member name="F:SecureDailyJournal.ViewModels.SettingsViewModel.exportPdfCommand">
+            <summary>The backing field for <see cref="P:SecureDailyJournal.ViewModels.SettingsViewModel.ExportPdfCommand"/>.</summary>
+        </member>
+        <member name="P:SecureDailyJournal.ViewModels.SettingsViewModel.ExportPdfCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:SecureDailyJournal.ViewModels.SettingsViewModel.ExportPdfAsync"/>.</summary>
+        </member>
+        <member name="T:SecureDailyJournal.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Button.TextColorTo(Microsoft.Maui.Controls.Button,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_DatePicker.TextColorTo(Microsoft.Maui.Controls.DatePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Editor.TextColorTo(Microsoft.Maui.Controls.Editor,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Entry.TextColorTo(Microsoft.Maui.Controls.Entry,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_InputView.TextColorTo(Microsoft.Maui.Controls.InputView,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Label.TextColorTo(Microsoft.Maui.Controls.Label,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Picker.TextColorTo(Microsoft.Maui.Controls.Picker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_RadioButton.TextColorTo(Microsoft.Maui.Controls.RadioButton,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_SearchBar.TextColorTo(Microsoft.Maui.Controls.SearchBar,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_TimePicker.TextColorTo(Microsoft.Maui.Controls.TimePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalEntries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalEntries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentStreak">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentStreak" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LongestStreak">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LongestStreak" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AverageWordCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AverageWordCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentMonth">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentMonth" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentMonthYear">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentMonthYear" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedEntry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedEntry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasSelectedEntry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasSelectedEntry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BackgroundColor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BackgroundColor" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TextColor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TextColor" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SearchQuery">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SearchQuery" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsLoading">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsLoading" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentFilter">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentFilter" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Content">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Content" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PrimaryMood">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PrimaryMood" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedMoodEmoji">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedMoodEmoji" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsPreviewMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsPreviewMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasExistingEntry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasExistingEntry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NewTag">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NewTag" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedCategory">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedCategory" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WordCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WordCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FormattedDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FormattedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CursorPosition">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CursorPosition" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectionLength">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectionLength" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Pin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Pin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConfirmPin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConfirmPin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsFirstTimeSetup">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsFirstTimeSetup" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ErrorMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ShowError">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ShowError" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HeaderText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HeaderText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ShowConfirmPin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ShowConfirmPin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedMood">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedMood" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsDarkMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsDarkMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ExportStartDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ExportStartDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ExportEndDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ExportEndDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StoragePath">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StoragePath" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalEntries">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalEntries" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentStreak">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentStreak" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LongestStreak">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LongestStreak" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AverageWordCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AverageWordCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentMonth">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentMonth" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentMonthYear">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentMonthYear" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedEntry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedEntry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasSelectedEntry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasSelectedEntry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BackgroundColor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BackgroundColor" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TextColor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TextColor" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SearchQuery">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SearchQuery" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsLoading">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsLoading" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentFilter">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentFilter" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Content">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Content" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PrimaryMood">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PrimaryMood" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedMoodEmoji">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedMoodEmoji" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsPreviewMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsPreviewMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasExistingEntry">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasExistingEntry" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NewTag">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NewTag" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedCategory">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedCategory" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WordCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WordCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FormattedDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FormattedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CursorPosition">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CursorPosition" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectionLength">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectionLength" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Pin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Pin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConfirmPin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConfirmPin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsFirstTimeSetup">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsFirstTimeSetup" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ErrorMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ShowError">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ShowError" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HeaderText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HeaderText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ShowConfirmPin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ShowConfirmPin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedMood">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedMood" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsDarkMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsDarkMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ExportStartDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ExportStartDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ExportEndDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ExportEndDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StoragePath">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StoragePath" generated properties.</summary>
+        </member>
+    </members>
+</doc>

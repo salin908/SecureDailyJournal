@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SecureDailyJournal.ViewModels"
+             x:Class="SecureDailyJournal.Views.LoginPage"
+             Title="Secure Journal"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}">
+    
+    <Grid RowDefinitions="Auto,*,Auto" Padding="30">
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0" Spacing="10" Margin="0,40,0,20">
+            <Label Text="🔐" 
+                   FontSize="60" 
+                   HorizontalOptions="Center"/>
+            <Label Text="{Binding HeaderText}" 
+                   FontSize="24" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+            <Label Text="Keep your thoughts safe and private" 
+                   FontSize="14" 
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+        </VerticalStackLayout>
+        
+        <!-- PIN Display and Error -->
+        <VerticalStackLayout Grid.Row="1" VerticalOptions="Center" Spacing="20">
+            <!-- PIN Dots -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                         BackgroundColor="{Binding Pin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=0}"/>
+                <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                         BackgroundColor="{Binding Pin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=1}"/>
+                <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                         BackgroundColor="{Binding Pin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=2}"/>
+                <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                         BackgroundColor="{Binding Pin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=3}"/>
+                <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                         BackgroundColor="{Binding Pin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=4}"/>
+                <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                         BackgroundColor="{Binding Pin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=5}"/>
+            </HorizontalStackLayout>
+            
+            <!-- Confirm PIN Label and Dots (for first time setup) -->
+            <VerticalStackLayout IsVisible="{Binding ShowConfirmPin}" Spacing="10">
+                <Label Text="Confirm PIN" 
+                       FontSize="16" 
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                    <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                             BackgroundColor="{Binding ConfirmPin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=0}"/>
+                    <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                             BackgroundColor="{Binding ConfirmPin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=1}"/>
+                    <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                             BackgroundColor="{Binding ConfirmPin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=2}"/>
+                    <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                             BackgroundColor="{Binding ConfirmPin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=3}"/>
+                    <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                             BackgroundColor="{Binding ConfirmPin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=4}"/>
+                    <BoxView WidthRequest="18" HeightRequest="18" CornerRadius="9"
+                             BackgroundColor="{Binding ConfirmPin.Length, Converter={StaticResource PinDotConverter}, ConverterParameter=5}"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            
+            <!-- Error Message -->
+            <Frame IsVisible="{Binding ShowError}" 
+                   BackgroundColor="#FEE2E2" 
+                   BorderColor="#FCA5A5"
+                   Padding="15,10"
+                   CornerRadius="8"
+                   HasShadow="False">
+                <Label Text="{Binding ErrorMessage}" 
+                       TextColor="#DC2626" 
+                       HorizontalOptions="Center"/>
+            </Frame>
+        </VerticalStackLayout>
+        
+        <!-- Numeric Keypad -->
+        <Grid Grid.Row="2" 
+              RowDefinitions="70,70,70,70" 
+              ColumnDefinitions="*,*,*" 
+              ColumnSpacing="15" 
+              RowSpacing="15"
+              Margin="0,20,0,30">
+            
+            <Button Grid.Row="0" Grid.Column="0" Text="1" Command="{Binding AddDigitCommand}" CommandParameter="1" Style="{StaticResource NumPadButtonStyle}"/>
+            <Button Grid.Row="0" Grid.Column="1" Text="2" Command="{Binding AddDigitCommand}" CommandParameter="2" Style="{StaticResource NumPadButtonStyle}"/>
+            <Button Grid.Row="0" Grid.Column="2" Text="3" Command="{Binding AddDigitCommand}" CommandParameter="3" Style="{StaticResource NumPadButtonStyle}"/>
+            
+            <Button Grid.Row="1" Grid.Column="0" Text="4" Command="{Binding AddDigitCommand}" CommandParameter="4" Style="{StaticResource NumPadButtonStyle}"/>
+            <Button Grid.Row="1" Grid.Column="1" Text="5" Command="{Binding AddDigitCommand}" CommandParameter="5" Style="{StaticResource NumPadButtonStyle}"/>
+            <Button Grid.Row="1" Grid.Column="2" Text="6" Command="{Binding AddDigitCommand}" CommandParameter="6" Style="{StaticResource NumPadButtonStyle}"/>
+            
+            <Button Grid.Row="2" Grid.Column="0" Text="7" Command="{Binding AddDigitCommand}" CommandParameter="7" Style="{StaticResource NumPadButtonStyle}"/>
+            <Button Grid.Row="2" Grid.Column="1" Text="8" Command="{Binding AddDigitCommand}" CommandParameter="8" Style="{StaticResource NumPadButtonStyle}"/>
+            <Button Grid.Row="2" Grid.Column="2" Text="9" Command="{Binding AddDigitCommand}" CommandParameter="9" Style="{StaticResource NumPadButtonStyle}"/>
+            
+            <Button Grid.Row="3" Grid.Column="0" Text="⌫" Command="{Binding BackspaceCommand}" Style="{StaticResource NumPadSecondaryStyle}"/>
+            <Button Grid.Row="3" Grid.Column="1" Text="0" Command="{Binding AddDigitCommand}" CommandParameter="0" Style="{StaticResource NumPadButtonStyle}"/>
+            <Button Grid.Row="3" Grid.Column="2" Text="✓" Command="{Binding SubmitCommand}" Style="{StaticResource NumPadPrimaryStyle}"/>
+        </Grid>
+    </Grid>
+</ContentPage>

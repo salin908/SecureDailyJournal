@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SecureDailyJournal.Views.AnalyticsPage"
+             Title="Analytics"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Header -->
+            <Label Text="Your Journaling Insights" 
+                   FontSize="24" 
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+            
+            <!-- Stats Overview -->
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="15" RowSpacing="15">
+                <!-- Total Entries -->
+                <Frame Grid.Row="0" Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="📝" FontSize="28"/>
+                        <Label Text="{Binding TotalEntries}" 
+                               FontSize="32" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Label Text="Total Entries" 
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <!-- Current Streak -->
+                <Frame Grid.Row="0" Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="🔥" FontSize="28"/>
+                        <Label Text="{Binding CurrentStreak}" 
+                               FontSize="32" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Label Text="Day Streak" 
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <!-- Longest Streak -->
+                <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="🏆" FontSize="28"/>
+                        <Label Text="{Binding LongestStreak}" 
+                               FontSize="32" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Label Text="Best Streak" 
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <!-- Avg Words -->
+                <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="✍️" FontSize="28"/>
+                        <Label Text="{Binding AverageWordCount}" 
+                               FontSize="32" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Label Text="Avg Words" 
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+            
+            <!-- Mood Distribution -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Mood Distribution" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    
+                    <CollectionView ItemsSource="{Binding MoodStats}" HeightRequest="200">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="50,*,Auto" Margin="0,5">
+                                    <Label Grid.Column="0" 
+                                           Text="{Binding MoodEmoji}" 
+                                           FontSize="24"
+                                           VerticalOptions="Center"/>
+                                    <Frame Grid.Column="1" 
+                                           Padding="0" 
+                                           CornerRadius="8" 
+                                           HasShadow="False"
+                                           BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#334155}"
+                                           HeightRequest="20"
+                                           VerticalOptions="Center">
+                                        <Frame Padding="0" 
+                                               CornerRadius="8" 
+                                               HasShadow="False"
+                                               BackgroundColor="#6366F1"
+                                               WidthRequest="{Binding BarWidth}"
+                                               HorizontalOptions="Start"/>
+                                    </Frame>
+                                    <Label Grid.Column="2" 
+                                           Text="{Binding Count}" 
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,0,0"
+                                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Top Tags -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Most Used Tags" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    
+                    <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Start">
+                        <BindableLayout.ItemsSource>
+                            <Binding Path="TopTags"/>
+                        </BindableLayout.ItemsSource>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="12,8" 
+                                       Margin="4" 
+                                       CornerRadius="20"
+                                       BackgroundColor="{AppThemeBinding Light=#E3F2FD, Dark=#1E3A5F}"
+                                       BorderColor="Transparent"
+                                       HasShadow="False">
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="{Binding Name}" 
+                                               TextColor="{AppThemeBinding Light=#1976D2, Dark=#90CAF9}"/>
+                                        <Label Text="{Binding Count, StringFormat='({0})'}" 
+                                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"
+                                               FontSize="12"/>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Writing Activity by Day -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Writing Activity by Day" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    
+                    <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="5">
+                        <BindableLayout.ItemsSource>
+                            <Binding Path="WeekdayStats"/>
+                        </BindableLayout.ItemsSource>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout>
+                                    <Frame HeightRequest="{Binding BarHeight}" 
+                                           WidthRequest="30"
+                                           CornerRadius="15"
+                                           BackgroundColor="#6366F1"
+                                           Padding="0"
+                                           HasShadow="False"/>
+                                    <Label Text="{Binding DayName}" 
+                                           HorizontalOptions="Center"
+                                           FontSize="11"
+                                           TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

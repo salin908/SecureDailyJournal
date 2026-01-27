@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SecureDailyJournal.ViewModels"
+             x:Class="SecureDailyJournal.Views.JournalListPage"
+             Title="Journal History"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}">
+    
+    <Grid RowDefinitions="Auto,Auto,*">
+        
+        <!-- Search Bar -->
+        <Frame Grid.Row="0" Margin="15,15,15,0" Padding="5" CornerRadius="12"
+               BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E293B}"
+               BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#334155}">
+            <SearchBar Placeholder="Search entries..."
+                       Text="{Binding SearchQuery}"
+                       SearchCommand="{Binding SearchCommand}"
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"/>
+        </Frame>
+        
+        <!-- Filters -->
+        <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never" Margin="15,10">
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="All" 
+                        Command="{Binding FilterCommand}" 
+                        CommandParameter="all"
+                        Style="{StaticResource TagButtonStyle}"/>
+                <Button Text="😊 Happy" 
+                        Command="{Binding FilterByMoodCommand}" 
+                        CommandParameter="Happy"
+                        Style="{StaticResource TagButtonStyle}"/>
+                <Button Text="😢 Sad" 
+                        Command="{Binding FilterByMoodCommand}" 
+                        CommandParameter="Sad"
+                        Style="{StaticResource TagButtonStyle}"/>
+                <Button Text="😰 Anxious" 
+                        Command="{Binding FilterByMoodCommand}" 
+                        CommandParameter="Anxious"
+                        Style="{StaticResource TagButtonStyle}"/>
+                <Button Text="😌 Calm" 
+                        Command="{Binding FilterByMoodCommand}" 
+                        CommandParameter="Calm"
+                        Style="{StaticResource TagButtonStyle}"/>
+            </HorizontalStackLayout>
+        </ScrollView>
+        
+        <!-- Entries List -->
+        <RefreshView Grid.Row="2" 
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Entries}"
+                            RemainingItemsThreshold="5"
+                            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+                
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15">
+                        <Label Text="📔" FontSize="60" HorizontalOptions="Center"/>
+                        <Label Text="No journal entries yet" 
+                               FontSize="18" 
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Start writing your first entry!" 
+                               FontSize="14" 
+                               TextColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="15,5" Style="{StaticResource CardStyle}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:JournalListViewModel}}, Path=OpenEntryCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                <!-- Title and Mood -->
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Text="{Binding Title}" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding PrimaryMood}" 
+                                       FontSize="24"/>
+                                
+                                <!-- Content Preview -->
+                                <Label Grid.Row="1" Grid.ColumnSpan="2"
+                                       Text="{Binding Content}" 
+                                       MaxLines="2"
+                                       LineBreakMode="TailTruncation"
+                                       TextColor="{AppThemeBinding Light=#475569, Dark=#CBD5E1}"
+                                       Margin="0,5"/>
+                                
+                                <!-- Date and Tags -->
+                                <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="10">
+                                    <Label Text="{Binding EntryDateKey}" 
+                                           FontSize="12"
+                                           TextColor="{AppThemeBinding Light=#94A3B8, Dark=#64748B}"/>
+                                    <Label Text="{Binding Tags}" 
+                                           FontSize="12"
+                                           TextColor="#6366F1"
+                                           LineBreakMode="TailTruncation"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="2" 
+                          IsRunning="{Binding IsLoading}" 
+                          IsVisible="{Binding IsLoading}"
+                          Color="#6366F1"
+                          VerticalOptions="Center"/>
+    </Grid>
+</ContentPage>
