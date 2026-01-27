@@ -69,6 +69,90 @@
                 </Frame>
             </Grid>
             
+            <!-- Additional Stats Row -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                <!-- Most Frequent Mood -->
+                <Frame Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="🎯" FontSize="28"/>
+                        <Label Text="{Binding MostFrequentMood}" 
+                               FontSize="20" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Label Text="Most Frequent" 
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <!-- Missed Days -->
+                <Frame Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="📅" FontSize="28"/>
+                        <Label Text="{Binding MissedDays}" 
+                               FontSize="32" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                        <Label Text="Missed Days" 
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+            
+            <!-- Mood Category Distribution -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Mood Category Distribution" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}"/>
+                    
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                        <!-- Positive -->
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="😊" FontSize="24" HorizontalOptions="Center"/>
+                            <Label Text="{Binding PositivePercentage, StringFormat='{0}%'}" 
+                                   FontSize="24" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   TextColor="#10B981"/>
+                            <Label Text="Positive" 
+                                   FontSize="12"
+                                   HorizontalOptions="Center"
+                                   TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        </VerticalStackLayout>
+                        
+                        <!-- Neutral -->
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="😐" FontSize="24" HorizontalOptions="Center"/>
+                            <Label Text="{Binding NeutralPercentage, StringFormat='{0}%'}" 
+                                   FontSize="24" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   TextColor="#6366F1"/>
+                            <Label Text="Neutral" 
+                                   FontSize="12"
+                                   HorizontalOptions="Center"
+                                   TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        </VerticalStackLayout>
+                        
+                        <!-- Negative -->
+                        <VerticalStackLayout Grid.Column="2">
+                            <Label Text="😔" FontSize="24" HorizontalOptions="Center"/>
+                            <Label Text="{Binding NegativePercentage, StringFormat='{0}%'}" 
+                                   FontSize="24" 
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   TextColor="#EF4444"/>
+                            <Label Text="Negative" 
+                                   FontSize="12"
+                                   HorizontalOptions="Center"
+                                   TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            
+            
             <!-- Mood Distribution -->
             <Frame Style="{StaticResource CardStyle}">
                 <VerticalStackLayout Spacing="15">

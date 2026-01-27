@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecureDailyJournal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+ffb2d7ac9e9c561f875fdf57993d30f385ddeca8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+92addfb18408842071bb4791f20a56f5b9bd9fca")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecureDailyJournal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecureDailyJournal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

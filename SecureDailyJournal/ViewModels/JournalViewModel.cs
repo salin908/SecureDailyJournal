@@ -18,30 +18,44 @@ public partial class JournalViewModel : ObservableObject, IQueryAttributable
         _ = InitializeAsync();
     }
     
-    // Available moods for selection
+    // Available moods for selection - Categorized by Positive, Neutral, Negative
     public List<MoodOption> AvailableMoods { get; } = new()
     {
-        new("Happy", "😊"),
-        new("Sad", "😢"),
-        new("Anxious", "😰"),
-        new("Calm", "😌"),
-        new("Excited", "🤩"),
-        new("Angry", "😠"),
-        new("Neutral", "😐"),
-        new("Grateful", "🙏"),
-        new("Tired", "😴"),
-        new("Energetic", "⚡")
+        // 😊 Positive Moods
+        new("Happy", "😊", "Positive"),
+        new("Excited", "🤩", "Positive"),
+        new("Relaxed", "😌", "Positive"),
+        new("Grateful", "🙏", "Positive"),
+        new("Confident", "😎", "Positive"),
+        
+        // 😐 Neutral Moods
+        new("Calm", "😐", "Neutral"),
+        new("Thoughtful", "🤔", "Neutral"),
+        new("Curious", "🧐", "Neutral"),
+        new("Nostalgic", "🥺", "Neutral"),
+        new("Bored", "😑", "Neutral"),
+        
+        // 😔 Negative Moods
+        new("Sad", "😢", "Negative"),
+        new("Angry", "😠", "Negative"),
+        new("Stressed", "😰", "Negative"),
+        new("Lonely", "😞", "Negative"),
+        new("Anxious", "😨", "Negative")
     };
     
     public ObservableCollection<string> SelectedSecondaryMoods { get; } = new();
     public ObservableCollection<string> SelectedTags { get; } = new();
     public ObservableCollection<Category> Categories { get; } = new();
     
-    // Common tags for quick selection
+    // Pre-built tags for quick selection (30+ tags as per requirements)
     public List<string> SuggestedTags { get; } = new()
     {
-        "reflection", "gratitude", "goals", "memories", "dreams",
-        "health", "work", "family", "travel", "creative"
+        "Work", "Career", "Studies", "Family", "Friends", "Relationships",
+        "Health", "Fitness", "Personal Growth", "Self-care", "Hobbies",
+        "Travel", "Nature", "Finance", "Spirituality", "Birthday",
+        "Holiday", "Vacation", "Celebration", "Exercise", "Reading",
+        "Writing", "Cooking", "Meditation", "Yoga", "Music",
+        "Shopping", "Parenting", "Projects", "Planning", "Reflection"
     };
 
     [ObservableProperty] private string title = string.Empty;
@@ -324,4 +338,4 @@ public partial class JournalViewModel : ObservableObject, IQueryAttributable
     #endregion
 }
 
-public record MoodOption(string Name, string Emoji);
+public record MoodOption(string Name, string Emoji, string Category = "Neutral");

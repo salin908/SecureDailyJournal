@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bHh+BJnIkPM=",
+  "dgSpecHash": "jGaBzCN9zRo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\securedailyjournal\\SecureDailyJournal.csproj",
+  "projectFilePath": "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\SecureDailyJournal\\SecureDailyJournal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sures\\.nuget\\packages\\communitytoolkit.maui\\9.1.1\\communitytoolkit.maui.9.1.1.nupkg.sha512",
     "C:\\Users\\sures\\.nuget\\packages\\communitytoolkit.maui.core\\9.1.1\\communitytoolkit.maui.core.9.1.1.nupkg.sha512",

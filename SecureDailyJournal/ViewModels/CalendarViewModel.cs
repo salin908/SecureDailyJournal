@@ -14,7 +14,9 @@ public partial class CalendarViewModel : ObservableObject
     {
         _dbService = dbService;
         _currentMonth = DateTime.Today;
-        _ = RefreshDataAsync();
+        CurrentMonthYear = _currentMonth.ToString("MMMM yyyy");
+        
+        System.Diagnostics.Debug.WriteLine("CalendarViewModel initialized");
     }
     
     public ObservableCollection<CalendarDay> CalendarDays { get; } = new();
@@ -36,6 +38,11 @@ public partial class CalendarViewModel : ObservableObject
     
     [ObservableProperty]
     private bool hasSelectedEntry;
+    
+    public async Task InitializeAsync()
+    {
+        await RefreshDataAsync();
+    }
     
     [RelayCommand]
     private async Task RefreshDataAsync()
@@ -89,8 +96,6 @@ public partial class CalendarViewModel : ObservableObject
     
     private async Task LoadCalendarDaysAsync()
     {
-        CalendarDays.Clear();
-        
         var firstDay = new DateTime(CurrentMonth.Year, CurrentMonth.Month, 1);
         var daysInMonth = DateTime.DaysInMonth(CurrentMonth.Year, CurrentMonth.Month);
         var startDayOfWeek = (int)firstDay.DayOfWeek;
@@ -99,10 +104,13 @@ public partial class CalendarViewModel : ObservableObject
         var entriesThisMonth = await _dbService.GetDatesWithEntriesAsync(CurrentMonth.Year, CurrentMonth.Month);
         var entryDates = new HashSet<string>(entriesThisMonth);
         
+        // Build the calendar days list
+        var days = new List<CalendarDay>();
+        
         // Add empty days for padding
         for (int i = 0; i < startDayOfWeek; i++)
         {
-            CalendarDays.Add(new CalendarDay { DayNumber = "", IsCurrentMonth = false });
+            days.Add(new CalendarDay { DayNumber = "", IsCurrentMonth = false });
         }
         
         // Add days of the month
@@ -113,7 +121,7 @@ public partial class CalendarViewModel : ObservableObject
             var isToday = date.Date == DateTime.Today;
             var hasEntry = entryDates.Contains(dateKey);
             
-            CalendarDays.Add(new CalendarDay
+            days.Add(new CalendarDay
             {
                 Date = date,
                 DayNumber = day.ToString(),
@@ -125,6 +133,17 @@ public partial class CalendarViewModel : ObservableObject
                 FontAttributes = isToday ? FontAttributes.Bold : FontAttributes.None
             });
         }
+        
+        // Update UI on main thread
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            CalendarDays.Clear();
+            foreach (var day in days)
+            {
+                CalendarDays.Add(day);
+            }
+            System.Diagnostics.Debug.WriteLine($"LoadCalendarDaysAsync completed: Added {days.Count} days to CalendarDays collection");
+        });
     }
 }
 

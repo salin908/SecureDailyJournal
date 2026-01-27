@@ -48,18 +48,26 @@
                         <Label Grid.Column="6" Text="Sat" HorizontalOptions="Center" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"/>
                     </Grid>
                     
+                    
                     <!-- Calendar Days -->
                     <CollectionView ItemsSource="{Binding CalendarDays}"
-                                    ItemsLayout="VerticalGrid, 7"
-                                    HeightRequest="300">
+                                    HeightRequest="350"
+                                    SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" 
+                                           Span="7"
+                                           HorizontalItemSpacing="5"
+                                           VerticalItemSpacing="5"/>
+                        </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid HeightRequest="40" WidthRequest="40">
+                                <Grid HeightRequest="50" WidthRequest="50">
                                     <Frame Padding="0"
-                                           CornerRadius="20"
+                                           CornerRadius="25"
                                            BackgroundColor="{Binding BackgroundColor}"
                                            BorderColor="Transparent"
-                                           HasShadow="False">
+                                           HasShadow="False"
+                                           Margin="2">
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer 
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CalendarViewModel}}, Path=SelectDateCommand}"
@@ -78,7 +86,7 @@
                                              BackgroundColor="#10B981"
                                              HorizontalOptions="Center"
                                              VerticalOptions="End"
-                                             Margin="0,0,0,2"
+                                             Margin="0,0,0,4"
                                              IsVisible="{Binding HasEntry}"/>
                                 </Grid>
                             </DataTemplate>

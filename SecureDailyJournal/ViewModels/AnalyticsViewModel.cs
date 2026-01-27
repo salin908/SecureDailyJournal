@@ -26,6 +26,21 @@ public partial class AnalyticsViewModel : ObservableObject
     [ObservableProperty]
     private int averageWordCount;
     
+    [ObservableProperty]
+    private string mostFrequentMood = "N/A";
+    
+    [ObservableProperty]
+    private int missedDays;
+    
+    [ObservableProperty]
+    private double positivePercentage;
+    
+    [ObservableProperty]
+    private double neutralPercentage;
+    
+    [ObservableProperty]
+    private double negativePercentage;
+    
     public ObservableCollection<MoodStat> MoodStats { get; } = new();
     public ObservableCollection<TagStat> TopTags { get; } = new();
     public ObservableCollection<WeekdayStat> WeekdayStats { get; } = new();
@@ -45,6 +60,35 @@ public partial class AnalyticsViewModel : ObservableObject
         {
             var totalWords = entries.Sum(e => e.Content?.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length ?? 0);
             AverageWordCount = totalWords / entries.Count;
+        }
+        
+        // Most frequent mood
+        if (entries.Count > 0)
+        {
+            var moodFrequency = entries.GroupBy(e => e.PrimaryMood)
+                .OrderByDescending(g => g.Count())
+                .FirstOrDefault();
+            MostFrequentMood = moodFrequency != null ? $"{GetMoodEmoji(moodFrequency.Key)} {moodFrequency.Key}" : "N/A";
+        }
+        
+        // Missed days calculation (days between first entry and today with no entry)
+        if (entries.Count > 0)
+        {
+            var firstEntryDate = entries.Min(e => DateTime.ParseExact(e.EntryDateKey, "yyyy-MM-dd", null));
+            var totalDaysSinceStart = (DateTime.Today - firstEntryDate.Date).Days + 1;
+            MissedDays = totalDaysSinceStart - entries.Count;
+        }
+        
+        // Mood category distribution (Positive, Neutral, Negative)
+        if (entries.Count > 0)
+        {
+            var positiveCount = entries.Count(e => IsMoodInCategory(e.PrimaryMood, "Positive"));
+            var neutralCount = entries.Count(e => IsMoodInCategory(e.PrimaryMood, "Neutral"));
+            var negativeCount = entries.Count(e => IsMoodInCategory(e.PrimaryMood, "Negative"));
+            
+            PositivePercentage = Math.Round((double)positiveCount / entries.Count * 100, 1);
+            NeutralPercentage = Math.Round((double)neutralCount / entries.Count * 100, 1);
+            NegativePercentage = Math.Round((double)negativeCount / entries.Count * 100, 1);
         }
         
         // Mood distribution
@@ -109,18 +153,44 @@ public partial class AnalyticsViewModel : ObservableObject
     
     private static string GetMoodEmoji(string mood) => mood?.ToLower() switch
     {
+        // Positive moods
         "happy" => "😊",
-        "sad" => "😢",
-        "anxious" => "😰",
-        "calm" => "😌",
         "excited" => "🤩",
-        "angry" => "😠",
-        "neutral" => "😐",
+        "relaxed" => "😌",
         "grateful" => "🙏",
-        "tired" => "😴",
-        "energetic" => "⚡",
+        "confident" => "😎",
+        
+        // Neutral moods
+        "calm" => "😐",
+        "thoughtful" => "🤔",
+        "curious" => "🧐",
+        "nostalgic" => "🥺",
+        "bored" => "😑",
+        
+        // Negative moods
+        "sad" => "😢",
+        "angry" => "😠",
+        "stressed" => "😰",
+        "lonely" => "😞",
+        "anxious" => "😨",
+        
         _ => "📝"
     };
+    
+    private static bool IsMoodInCategory(string mood, string category)
+    {
+        var positiveMoods = new[] { "Happy", "Excited", "Relaxed", "Grateful", "Confident" };
+        var neutralMoods = new[] { "Calm", "Thoughtful", "Curious", "Nostalgic", "Bored" };
+        var negativeMoods = new[] { "Sad", "Angry", "Stressed", "Lonely", "Anxious" };
+        
+        return category switch
+        {
+            "Positive" => positiveMoods.Contains(mood, StringComparer.OrdinalIgnoreCase),
+            "Neutral" => neutralMoods.Contains(mood, StringComparer.OrdinalIgnoreCase),
+            "Negative" => negativeMoods.Contains(mood, StringComparer.OrdinalIgnoreCase),
+            _ => false
+        };
+    }
 }
 
 public class MoodStat

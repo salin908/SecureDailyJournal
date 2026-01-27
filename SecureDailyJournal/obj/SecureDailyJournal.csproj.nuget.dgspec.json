@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\securedailyjournal\\SecureDailyJournal.csproj": {}
+    "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\SecureDailyJournal\\SecureDailyJournal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\securedailyjournal\\SecureDailyJournal.csproj": {
+    "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\SecureDailyJournal\\SecureDailyJournal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\securedailyjournal\\SecureDailyJournal.csproj",
+        "projectUniqueName": "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\SecureDailyJournal\\SecureDailyJournal.csproj",
         "projectName": "SecureDailyJournal",
-        "projectPath": "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\securedailyjournal\\SecureDailyJournal.csproj",
+        "projectPath": "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\SecureDailyJournal\\SecureDailyJournal.csproj",
         "packagesPath": "C:\\Users\\sures\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\securedailyjournal\\obj\\",
+        "outputPath": "C:\\Users\\sures\\OneDrive\\Desktop\\SecureDailyJournal\\SecureDailyJournal\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [

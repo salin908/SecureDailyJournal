@@ -8,6 +8,9 @@ public partial class CalendarPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+        
+        // Initialize calendar data asynchronously
+        _ = viewModel.InitializeAsync();
     }
     
     protected override void OnAppearing()
